@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人教版七上 Unit 8 任务型教案</title>
+<style>
+  :root {
+    --primary: #2B6CB0;
+    --primary-light: #EBF4FF;
+    --primary-dark: #1A4A7A;
+    --accent: #E53E3E;
+    --accent-light: #FFF5F5;
+    --green: #38A169;
+    --green-light: #F0FFF4;
+    --orange: #DD6B20;
+    --orange-light: #FFFAF0;
+    --purple: #6B46C1;
+    --purple-light: #FAF5FF;
+    --teal: #319795;
+    --teal-light: #E6FFFA;
+    --gray-50: #F7FAFC;
+    --gray-100: #EDF2F7;
+    --gray-200: #E2E8F0;
+    --gray-300: #CBD5E0;
+    --gray-500: #718096;
+    --gray-600: #4A5568;
+    --gray-700: #2D3748;
+    --gray-800: #1A202C;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-700);
+    line-height: 1.7;
+  }
+
+  /* Header */
+  .hero {
+    background: linear-gradient(135deg, #1A4A7A 0%, #2B6CB0 40%, #3182CE 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(4px);
+  }
+  .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero h2 { font-size: 20px; font-weight: 400; opacity: 0.9; margin-bottom: 24px; }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    opacity: 0.85;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* Container */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* Section */
+  .section {
+    margin: 36px 0;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gray-200);
+  }
+  .section-num {
+    width: 36px; height: 36px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  /* Cards */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-accent {
+    border-left: 4px solid var(--primary);
+  }
+  .card-green {
+    border-left: 4px solid var(--green);
+  }
+  .card-orange {
+    border-left: 4px solid var(--orange);
+  }
+  .card-purple {
+    border-left: 4px solid var(--purple);
+  }
+  .card-red {
+    border-left: 4px solid var(--accent);
+  }
+  .card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--gray-800);
+  }
+  .card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    color: var(--gray-700);
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 2px 4px 2px 0;
+  }
+  .tag-blue { background: var(--primary-light); color: var(--primary); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+  .tag-red { background: var(--accent-light); color: var(--accent); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+
+  /* Tables */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .tbl th {
+    background: var(--gray-100);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--gray-600);
+    border-bottom: 2px solid var(--gray-200);
+    font-size: 13px;
+  }
+  .tbl td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+  }
+  .tbl tr:hover td { background: var(--gray-50); }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 16px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--gray-200);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: white;
+  }
+  .timeline-item.active::before {
+    background: var(--primary);
+  }
+  .timeline-label {
+    font-size: 12px;
+    color: var(--gray-500);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .timeline-content {
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+
+  /* Quote */
+  .quote {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 16px 0;
+    font-style: italic;
+    color: var(--primary-dark);
+  }
+  .quote-author {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  /* Chunk box */
+  .chunk-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .chunk-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--gray-200);
+  }
+  .chunk-card h5 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .chunk-card .en {
+    font-family: "Georgia", serif;
+    font-size: 15px;
+    color: var(--primary-dark);
+    line-height: 1.8;
+  }
+  .chunk-card .cn {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-top: 4px;
+  }
+
+  /* Period card */
+  .period-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-lg);
+  }
+  .period-header {
+    padding: 20px 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .period-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+  }
+  .period-header .period-tag {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+  .period-body { padding: 24px; background: white; }
+
+  .period-1 .period-header { background: linear-gradient(135deg, #2B6CB0, #3182CE); }
+  .period-2 .period-header { background: linear-gradient(135deg, #38A169, #48BB78); }
+  .period-3 .period-header { background: linear-gradient(135deg, #6B46C1, #805AD5); }
+
+  /* Activity flow */
+  .activity-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 16px 0;
+  }
+  .activity-step {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--gray-200);
+  }
+  .activity-step:last-child { border-bottom: none; }
+  .activity-time {
+    flex-shrink: 0;
+    width: 56px;
+    text-align: center;
+  }
+  .activity-time .num {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .activity-time .unit {
+    font-size: 11px;
+    color: var(--gray-500);
+  }
+  .activity-body { flex: 1; }
+  .activity-body h5 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  .activity-body p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin: 4px 0;
+  }
+  .activity-detail {
+    background: var(--gray-50);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--gray-600);
+  }
+  .activity-detail strong { color: var(--gray-700); }
+
+  /* Assessment */
+  .assess-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .assess-item {
+    background: var(--gray-50);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .assess-item .icon { font-size: 24px; margin-bottom: 6px; }
+  .assess-item .label { font-size: 13px; font-weight: 600; color: var(--gray-700); }
+  .assess-item .desc { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
+
+  /* Rubric */
+  .rubric { margin: 16px 0; }
+  .rubric-header {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr;
+    gap: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+  }
+  .rubric-header > div {
+    padding: 8px 10px;
+    background: var(--gray-100);
+    border-bottom: 2px solid var(--gray-200);
+  }
+  .rubric-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr;
+    gap: 0;
+    font-size: 13px;
+  }
+  .rubric-row > div {
+    padding: 10px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .rubric-row > div:first-child {
+    font-weight: 600;
+    color: var(--gray-700);
+    background: var(--gray-50);
+  }
+
+  /* Scaffolding */
+  .scaffold-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .scaffold-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--gray-200);
+    position: relative;
+  }
+  .scaffold-card h5 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scaffold-card p {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+  .scaffold-level {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .level-low { background: var(--green); }
+  .level-mid { background: var(--orange); }
+  .level-high { background: var(--accent); }
+
+  /* Thinking */
+  .thinking-ladder {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin: 20px 0;
+    padding: 0 20px;
+  }
+  .thinking-step {
+    flex: 1;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    padding: 16px 12px 12px;
+    color: white;
+  }
+  .thinking-step h5 { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: white; }
+  .thinking-step p { font-size: 12px; opacity: 0.9; }
+  .thinking-step.s1 { background: var(--green); height: 80px; }
+  .thinking-step.s2 { background: var(--orange); height: 120px; }
+  .thinking-step.s3 { background: var(--accent); height: 160px; }
+
+  /* Nav */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 0 24px;
+  }
+  .nav-link {
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-500);
+    white-space: nowrap;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* Highlight */
+  .hl {
+    background: #FEFCBF;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+  .en-text {
+    font-family: "Georgia", serif;
+    color: var(--primary-dark);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--gray-500);
+    font-size: 13px;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 40px;
+  }
+
+  /* Print */
+  @media print {
+    .nav-bar { display: none; }
+    .hero { padding: 30px 20px; }
+    .card { box-shadow: none; border: 1px solid var(--gray-200); }
+    .period-card { box-shadow: none; border: 1px solid var(--gray-200); }
+    body { background: white; }
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 24px; }
+    .hero h2 { font-size: 16px; }
+    .hero { padding: 40px 20px 36px; }
+    .scaffold-grid { grid-template-columns: 1fr; }
+    .thinking-ladder { flex-direction: column; align-items: stretch; }
+    .thinking-step { border-radius: 10px; height: auto !important; }
+    .rubric-header, .rubric-row { grid-template-columns: 80px 1fr 1fr 1fr; font-size: 11px; }
+    .chunk-box { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#overview" class="nav-link">单元总览</a>
+    <a href="#chunks" class="nav-link">语块支架</a>
+    <a href="#period1" class="nav-link">第1课时</a>
+    <a href="#period2" class="nav-link">第2课时</a>
+    <a href="#period3" class="nav-link">第3课时</a>
+    <a href="#scaffold" class="nav-link">分层支架</a>
+    <a href="#assess" class="nav-link">评价设计</a>
+    <a href="#thinking" class="nav-link">思维培养</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">任务型教学设计</div>
+    <h1>Unit 8 &middot; When is your birthday?</h1>
+    <h2>人教版七年级上册 &middot; 基于龚亚夫任务型教学法的课堂教案</h2>
+    <div class="hero-meta">
+      <span>&#128218; 3课时任务链</span>
+      <span>&#127891; 七年级上学期</span>
+      <span>&#128172; 语块&mdash;句型&mdash;任务链</span>
+      <span>&#129302; AI协同备课</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ==================== SECTION 1: Unit Overview ==================== -->
+<section class="section" id="overview">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">单元总览与设计思路</div>
+  </div>
+
+  <div class="card card-accent">
+    <h3>&#127919; 核心驱动问题</h3>
+    <div class="quote" style="font-size: 16px;">
+      "What makes a date special, and how do we celebrate what matters?"
+      <br><span style="font-size:14px; opacity:0.85;">什么样的日期是特别的？我们如何庆祝那些重要的事？</span>
+    </div>
+    <p style="margin-top:12px; font-size:14px; color: var(--gray-600);">
+      这个问题统领3个课时。它不只是一个语法操练的借口，而是让学生思考<strong>"日期为什么重要"</strong>——从个人生日到学校活动到文化节庆，驱动学生从<strong>识别描述</strong>走向<strong>分析比较</strong>再走向<strong>评价创造</strong>。
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>&#128203; 单元主题与育人指向</h3>
+    <table class="tbl">
+      <tr><th style="width:120px;">维度</th><th>内容</th></tr>
+      <tr><td><strong>主题范畴</strong></td><td>人与社会 &mdash; 文化习俗与社会活动</td></tr>
+      <tr><td><strong>主题意义</strong></td><td>通过谈论生日和重要日期，理解"重要日子"背后的文化意义与情感价值，形成关爱他人、尊重多元的意识</td></tr>
+      <tr><td><strong>核心素养</strong></td><td>
+        <span class="tag tag-blue">语言能力</span>
+        <span class="tag tag-green">文化意识</span>
+        <span class="tag tag-orange">思维品质</span>
+        <span class="tag tag-purple">学习能力</span>
+      </td></tr>
+      <tr><td><strong>思维培养</strong></td><td>
+        <span class="tag tag-green">识别描述</span> 说出日期和活动
+        <span class="tag tag-orange">分析比较</span> 对比不同节庆
+        <span class="tag tag-red">评价创造</span> 设计活动日程
+      </td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>&#128260; 传统教案 vs 任务型教案</h3>
+    <table class="tbl">
+      <tr><th>维度</th><th>传统做法</th><th>本设计做法</th></tr>
+      <tr><td><strong>起点</strong></td><td>教12个月份+31个序数词</td><td>核心问题驱动："什么日期是特别的？"</td></tr>
+      <tr><td><strong>路径</strong></td><td>词汇 &rarr; 语法 &rarr; 课文 &rarr; 练习</td><td>语块 &rarr; 句型 &rarr; 任务链（输入&mdash;加工&mdash;输出）</td></tr>
+      <tr><td><strong>核心</strong></td><td>掌握 when 问句</td><td>用 when 问句完成真实任务（制作班级生日历、设计活动日程）</td></tr>
+      <tr><td><strong>读写关系</strong></td><td>听力和口语为主，写作缺失</td><td>口头内化 &rarr; 书面输出，闭环完整</td></tr>
+      <tr><td><strong>评价</strong></td><td>课后测验</td><td>镶嵌在每个环节的过程性评价</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>&#128200; 3课时任务链总览</h3>
+    <table class="tbl">
+      <tr>
+        <th>课时</th>
+        <th>阶段</th>
+        <th>核心任务</th>
+        <th>产出</th>
+      </tr>
+      <tr>
+        <td><span class="tag tag-blue">第1课时</span></td>
+        <td>学习理解</td>
+        <td>读教材，提取日期表达语块</td>
+        <td>班级生日信息表</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-green">第2课时</span></td>
+        <td>应用实践</td>
+        <td>口头内化：采访与介绍生日和活动</td>
+        <td>口头汇报：我最想参加的活动</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-purple">第3课时</span></td>
+        <td>迁移创新</td>
+        <td>写活动日程信/设计校园文化周</td>
+        <td>书面写作：活动推荐信</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 2: Language Chunks ==================== -->
+<section class="section" id="chunks">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">语块—句型支架</div>
+  </div>
+
+  <div class="quote">
+    教材不是被"讲完"的内容，而是学生迁移表达真实世界的语言资源。<br>
+    <div class="quote-author">—— 龚亚夫</div>
+  </div>
+
+  <div class="card">
+    <h3>&#128208; 按表达功能分类的语块—句型对照表</h3>
+    <p style="font-size:13px; color: var(--gray-500); margin-bottom:16px;">不是按词汇表教，而是按"表达什么"分类。学生需要说什么，就知道用什么。</p>
+
+    <div class="chunk-box">
+      <!-- Chunk 1: 询问日期 -->
+      <div class="chunk-card" style="background: var(--primary-light);">
+        <h5><span class="tag tag-blue">询问日期</span></h5>
+        <div class="en">
+          When is your / his / her birthday?<br>
+          What's the date today?<br>
+          When is the school trip?
+        </div>
+        <div class="cn">你的/他的/她的生日是什么时候？今天是几号？学校旅行是什么时候？</div>
+      </div>
+
+      <!-- Chunk 2: 表达日期 -->
+      <div class="chunk-card" style="background: var(--green-light);">
+        <h5><span class="tag tag-green">表达日期</span></h5>
+        <div class="en">
+          My / His / Her birthday is on + 月份 + 序数词.<br>
+          It's January 5th.<br>
+          The basketball game is on September 8th.
+        </div>
+        <div class="cn">我的/他的/她的生日在……篮球赛在9月8日。</div>
+      </div>
+
+      <!-- Chunk 3: 询问年龄 -->
+      <div class="chunk-card" style="background: var(--orange-light);">
+        <h5><span class="tag tag-orange">询问与表达年龄</span></h5>
+        <div class="en">
+          How old are you / is he / is she?<br>
+          I'm / He's / She's twelve (years old).
+        </div>
+        <div class="cn">你/他/她多大了？我/他/她12岁。</div>
+      </div>
+
+      <!-- Chunk 4: 谈论活动 -->
+      <div class="chunk-card" style="background: var(--purple-light);">
+        <h5><span class="tag tag-purple">谈论学校活动</span></h5>
+        <div class="en">
+          Do you have a School Day / Art Festival?<br>
+          Yes, we do. / No, we don't.<br>
+          We have a(n) ... on ...
+        </div>
+        <div class="cn">你们有学校开放日/艺术节吗？我们有……在……</div>
+      </div>
+
+      <!-- Chunk 5: 评价意义 -->
+      <div class="chunk-card" style="background: var(--accent-light);">
+        <h5><span class="tag tag-red">评价意义</span></h5>
+        <div class="en">
+          That's a special day for me because ...<br>
+          It's important to remember ...<br>
+          I like ... because we can ...
+        </div>
+        <div class="cn">那对我特别因为……记住……很重要。我喜欢……因为我们可以……</div>
+      </div>
+
+      <!-- Chunk 6: 推荐建议 -->
+      <div class="chunk-card" style="background: var(--teal-light);">
+        <h5><span class="tag tag-teal">推荐与建议</span></h5>
+        <div class="en">
+          You can come to our ... on ...<br>
+          Please come and join us!<br>
+          I think you'll like ...
+        </div>
+        <div class="cn">你可以在……来参加我们的……请来加入我们！我觉得你会喜欢……</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-accent">
+    <h3>&#128396; 课文性质定位（教师必做）</h3>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:12px;">明确每篇课文的定位，才能决定教学取舍——不是面面俱到，而是为核心任务服务。</p>
+    <table class="tbl">
+      <tr><th>教材内容</th><th>性质定位</th><th>教学侧重</th></tr>
+      <tr><td>Section A 1a-2a（月份、序数词、When问句）</td><td><span class="tag tag-blue">引入型</span></td><td>快速过，不逐词教；用任务驱动，在用中学</td></tr>
+      <tr><td>Section A 2b-2d（日历填写、ID卡、对话）</td><td><span class="tag tag-green">核心型</span></td><td>重点训练"询问与表达日期"语块，搭建任务链主轴</td></tr>
+      <tr><td>Section B 1-2c（学校活动、日历填写）</td><td><span class="tag tag-orange">拓展型</span></td><td>迁移到"谈论学校活动"，为写作输出提供话题和语块</td></tr>
+      <tr><td>Section B 3a-4（日程表设计、写作）</td><td><span class="tag tag-purple">输出型</span></td><td>写作任务落地——设计活动日程并推荐</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 3: Period 1 ==================== -->
+<section class="section" id="period1">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--primary);">1</div>
+    <div class="section-title">第1课时：学习理解 &mdash; "日子里的秘密"</div>
+  </div>
+
+  <div class="period-card period-1">
+    <div class="period-header">
+      <div>
+        <h3>What makes a date special?</h3>
+        <p style="font-size:14px; opacity:0.85; margin-top:4px;">读教材 &middot; 提取语言资源 &middot; 完成班级生日信息表</p>
+      </div>
+      <span class="period-tag">45分钟</span>
+    </div>
+    <div class="period-body">
+      <table class="tbl" style="margin-bottom:20px;">
+        <tr><th style="width:120px;">维度</th><th>内容</th></tr>
+        <tr><td><strong>教学目标</strong></td><td>
+          1. 语言能力：能使用"When is..." / "My/His/Her birthday is on..."询问和表达日期<br>
+          2. 文化意识：了解中西方重要日期（生日、节日），理解日期的文化含义<br>
+          3. 思维品质：能从日期信息中分类（生日/节日/学校活动）<br>
+          4. 学习能力：能在听力中用"先写首字母"策略记录信息
+        </td></tr>
+        <tr><td><strong>核心任务</strong></td><td>完成班级生日信息表（每人记录3位同学的生日和年龄）</td></tr>
+        <tr><td><strong>重点语块</strong></td><td>询问日期 + 表达日期（2类）</td></tr>
+      </table>
+
+      <h4>&#9654; 教学活动流程</h4>
+      <div class="activity-flow">
+        <!-- Step 1 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">5</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动1：入场任务 &mdash; "猜猜这是谁"</h5>
+            <p>教师展示3条名人生日线索（不提名字），学生猜是谁</p>
+            <div class="activity-detail">
+              <strong>教师引导：</strong>This person's birthday is on October 15th. He is a very famous basketball player. Who is he? <span class="en-text">(Yao Ming)</span><br>
+              <strong>设计意图：</strong>用真实人物引发兴趣，<span class="hl">核心问题前置</span>——"知道一个人的生日意味着什么？"<br>
+              <strong>评价检查：</strong>学生能否听懂月份词？记录哪些词听不懂（诊断起点）
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">12</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动2：语块提取 &mdash; "从课文找表达"</h5>
+            <p>听Section A 1b、2b录音，从对话中圈画"询问日期"和"表达日期"的语块</p>
+            <div class="activity-detail">
+              <strong>三色标注法：</strong><br>
+              &#128308; 主题相关词（本单元特有）：January, February, 1st, 2nd, 3rd...<br>
+              &#128309; 可迁移语块（跨话题可用）：When is...? &mdash; It's on... / How old is...? &mdash; He's...<br>
+              &#128994; 句型结构（写作支架）：My/His/Her birthday is on + 月份 + 序数词<br><br>
+              <strong>关键操作：</strong>不逐词教12个月份，而是<span class="hl">在听力任务中让学生自己识别</span>。听完1b后问："你听到了哪些月份词？写下来。"<br>
+              <strong>序数词策略：</strong>不给规则，让学生对比1st-31st与one-thirty-one，<span class="hl">两人一组找规律</span>。教师只补充特殊变化（1st, 2nd, 3rd, 5th, 8th, 9th, 12th, 20th, 21st, 30th, 31st）。
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">8</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动3：信息加工 &mdash; "填写ID卡"</h5>
+            <p>使用Section A 3a的三张ID卡，练习"询问和表达日期+年龄"</p>
+            <div class="activity-detail">
+              <strong>Pair Work支架：</strong><br>
+              A: When is your birthday, [Name]?<br>
+              B: My birthday is on [Month + Date].<br>
+              A: How old are you?<br>
+              B: I'm [Age].<br><br>
+              <strong>教师引导：</strong>先示范（T&mdash;S1），再Pair Work<br>
+              <strong>评价检查：</strong>巡视听学生是否正确使用"On + 月份 + 序数词"结构
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">15</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动4：核心任务 &mdash; "班级生日大调查"</h5>
+            <p>每人采访3位同学，记录姓名、生日、年龄，完成调查表</p>
+            <div class="activity-detail">
+              <strong>调查表模板：</strong><br>
+              <table style="width:100%; border-collapse:collapse; margin:8px 0; font-size:13px;">
+                <tr style="background:#EDF2F7;">
+                  <td style="padding:6px 10px; border:1px solid #E2E8F0; font-weight:600;">Name</td>
+                  <td style="padding:6px 10px; border:1px solid #E2E8F0; font-weight:600;">Birthday</td>
+                  <td style="padding:6px 10px; border:1px solid #E2E8F0; font-weight:600;">Age</td>
+                </tr>
+                <tr><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td></tr>
+                <tr><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td></tr>
+                <tr><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td><td style="padding:6px 10px; border:1px solid #E2E8F0;">&nbsp;</td></tr>
+              </table>
+              <strong>分层支持：</strong><br>
+              &#8226; 初阶：使用完整句型模板，只需替换关键词<br>
+              &#8226; 中阶：用句型菜单自组对话<br>
+              &#8226; 高阶：追问"Why do you like your birthday?"（引入评价意义语块）<br><br>
+              <strong>产出：</strong>完成调查表 &rarr; 找出"同月生"的同学 &rarr; 汇报"XXX and XXX were born in the same month!"
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">5</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动5：收束 &mdash; "今天是什么特别日子？"</h5>
+            <p>回到核心问题，请1-2位学生分享调查中的发现</p>
+            <div class="activity-detail">
+              <strong>教师引导：</strong>"Is anyone's birthday today? / this month? What makes a birthday special?"<br>
+              <strong>可迁移要点：</strong>用"When is..."询问信息时，需注意"On + 月份 + 序数词"的完整结构<br>
+              <strong>作业：</strong>① 询问3位家人的生日并记录 ② 找出3个中国重要节日的日期（用英文记录）
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 4: Period 2 ==================== -->
+<section class="section" id="period2">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--green);">2</div>
+    <div class="section-title">第2课时：应用实践 &mdash; "我们的活动日历"</div>
+  </div>
+
+  <div class="period-card period-2">
+    <div class="period-header">
+      <div>
+        <h3>How do we celebrate what matters?</h3>
+        <p style="font-size:14px; opacity:0.85; margin-top:4px;">口头内化 &middot; 谈论活动 &middot; 采访与汇报</p>
+      </div>
+      <span class="period-tag">45分钟</span>
+    </div>
+    <div class="period-body">
+      <table class="tbl" style="margin-bottom:20px;">
+        <tr><th style="width:120px;">维度</th><th>内容</th></tr>
+        <tr><td><strong>教学目标</strong></td><td>
+          1. 语言能力：能使用"谈论学校活动"和"推荐与建议"语块完成口头任务<br>
+          2. 文化意识：了解中西方学校活动差异，认识活动背后的文化意义<br>
+          3. 思维品质：能比较不同活动的意义，选择并推荐<br>
+          4. 学习能力：能在合作中分工完成采访任务
+        </td></tr>
+        <tr><td><strong>核心任务</strong></td><td>采访同学"最想参加的学校活动"，口头汇报推荐理由</td></tr>
+        <tr><td><strong>重点语块</strong></td><td>谈论学校活动 + 评价意义 + 推荐建议（3类）</td></tr>
+      </table>
+
+      <h4>&#9654; 教学活动流程</h4>
+      <div class="activity-flow">
+        <!-- Step 1 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">5</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动1：入场任务 &mdash; "节日快问快答"</h5>
+            <p>复习上节课日期表达，快速问答中国重要节日日期</p>
+            <div class="activity-detail">
+              <strong>教师：</strong>When is National Day? / Children's Day? / Teachers' Day? / Spring Festival?<br>
+              <strong>学生抢答：</strong>It's on October 1st. / June 1st. / September 10th. / ...<br>
+              <strong>核心问题延伸：</strong>"Why is Children's Day on June 1st? Is there a story behind it?" &rarr; 引出"日期背后的意义"
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">10</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动2：语块拓展 &mdash; "学校活动知多少"</h5>
+            <p>学习Section B 1-2b的学校活动词汇，按"活动类型"分类</p>
+            <div class="activity-detail">
+              <strong>图片导入：</strong>展示学校活动图片，教师用"Do we have a basketball game?"引出新词<br>
+              <strong>分类整理：</strong><br>
+              &bull; 比赛类：basketball game, volleyball game, tennis game<br>
+              &bull; 展示类：art festival, music festival, School Day<br>
+              &bull; 竞赛类：English speech contest, Chinese contest<br>
+              &bull; 外出类：school trip<br><br>
+              <strong>听力策略训练（2a/2b）：</strong>"先写首字母，再补全"&mdash;&mdash;这是可迁移的学习策略<br>
+              <strong>评价检查：</strong>学生能否在图片和词组之间快速匹配
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">12</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动3：口头内化 &mdash; "校园小记者"</h5>
+            <p>Pair Work：一人扮演记者，一人扮演校长，问答学校活动安排</p>
+            <div class="activity-detail">
+              <strong>对话支架：</strong><br>
+              记者：Do you have a(n) [activity] at your school?<br>
+              校长：Yes, we do. / No, we don't.<br>
+              记者：When is it?<br>
+              校长：It's on [Month + Date].<br>
+              记者：That sounds [great/fun/exciting]! I think students will like it because ...<br><br>
+              <strong>关键设计：</strong>最后一句是<span class="hl">评价意义语块</span>的口头练习，是从"描述"走向"评价"的过渡。AI容易跳过这一步，教师必须加。<br>
+              <strong>分层：</strong>初阶只用前3句；高阶加评价句
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">13</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动4：核心任务 &mdash; "我最想参加的活动"采访与汇报</h5>
+            <p>小组采访：每人选择1个最想参加的学校活动，采访2位同学的看法，然后汇报</p>
+            <div class="activity-detail">
+              <strong>采访框架：</strong><br>
+              A: What activity do you want to join?<br>
+              B: I want to join the [activity].<br>
+              A: When is it?<br>
+              B: It's on [Month + Date].<br>
+              A: Why do you like it?<br>
+              B: Because I think it's [fun/interesting/exciting]. We can [learn English / play sports / make friends].<br><br>
+              <strong>汇报模板：</strong><br>
+              "In my group, [Name] wants to join the [activity] on [Date]. He/She likes it because ... I want to join the [activity] because ..."<br><br>
+              <strong>思维培养：</strong>"Why do you like it?"不只是练语言，更是练<span class="hl">分析与评价</span>。<br>
+              <strong>产出：</strong>每人完成1次口头汇报
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">5</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动5：收束 &mdash; "活动背后的意义"</h5>
+            <p>回到核心问题，请2-3位学生分享"为什么这个活动对你重要"</p>
+            <div class="activity-detail">
+              <strong>教师引导：</strong>"We know WHEN the activities are. But WHY do we have them? What makes them special?"<br>
+              <strong>可迁移要点：</strong>介绍活动不只说"有什么"和"什么时候"，更要说"为什么值得参加"<br>
+              <strong>作业：</strong>① 用英文写出你学校5个活动的名称和日期 ② 为你最想参加的活动写2-3句推荐理由（用上because）
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 5: Period 3 ==================== -->
+<section class="section" id="period3">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--purple);">3</div>
+    <div class="section-title">第3课时：迁移创新 &mdash; "写给朋友的邀请信"</div>
+  </div>
+
+  <div class="period-card period-3">
+    <div class="period-header">
+      <div>
+        <h3>How do we share what matters?</h3>
+        <p style="font-size:14px; opacity:0.85; margin-top:4px;">写作输出 &middot; 活动推荐信 &middot; 评价改进</p>
+      </div>
+      <span class="period-tag">45分钟</span>
+    </div>
+    <div class="period-body">
+      <table class="tbl" style="margin-bottom:20px;">
+        <tr><th style="width:120px;">维度</th><th>内容</th></tr>
+        <tr><td><strong>教学目标</strong></td><td>
+          1. 语言能力：能综合运用6类语块，写60-80词活动推荐信<br>
+          2. 文化意识：通过推荐活动，传递校园文化，体现文化自信<br>
+          3. 思维品质：能评价活动意义，有理有据地推荐<br>
+          4. 学习能力：能对照评价量表自评互评，修改完善写作
+        </td></tr>
+        <tr><td><strong>核心任务</strong></td><td>写一封活动推荐信：向朋友推荐一个学校活动，说明时间、内容、推荐理由</td></tr>
+        <tr><td><strong>重点语块</strong></td><td>综合运用6类语块（特别是评价意义+推荐建议）</td></tr>
+      </table>
+
+      <h4>&#9654; 教学活动流程</h4>
+      <div class="activity-flow">
+        <!-- Step 1 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">5</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动1：入场任务 &mdash; "帮帮我"</h5>
+            <p>情境导入：你的一位朋友刚转学到你们学校，想知道学校有什么活动</p>
+            <div class="activity-detail">
+              <strong>教师：</strong>"Your friend Li Ming is new at our school. He asks you: 'What activities does your school have? Which one should I join?' Can you help him?"<br>
+              <strong>设计意图：</strong><span class="hl">真实场景驱动写作</span>——不是"写一篇作文"，而是"帮朋友一个忙"
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">8</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动2：写作支架 &mdash; "五问成文"</h5>
+            <p>用五个问题搭建写作框架，学生口头回答后再写</p>
+            <div class="activity-detail">
+              <strong>五问支架（适配活动推荐信）：</strong><br>
+              <table style="width:100%; border-collapse:collapse; font-size:13px; margin:8px 0;">
+                <tr style="background:#EDF2F7;">
+                  <td style="padding:8px 10px; border:1px solid #E2E8F0; font-weight:600; width:40%;">问题</td>
+                  <td style="padding:8px 10px; border:1px solid #E2E8F0; font-weight:600;">可用句型</td>
+                </tr>
+                <tr><td style="padding:8px 10px; border:1px solid #E2E8F0;"><strong>What activity?</strong> 推荐什么活动？</td><td style="padding:8px 10px; border:1px solid #E2E8F0;">We have a(n) ... at our school.</td></tr>
+                <tr><td style="padding:8px 10px; border:1px solid #E2E8F0;"><strong>When is it?</strong> 什么时候？</td><td style="padding:8px 10px; border:1px solid #E2E8F0;">It's on [Month + Date].</td></tr>
+                <tr><td style="padding:8px 10px; border:1px solid #E2E8F0;"><strong>What can you do?</strong> 做什么？</td><td style="padding:8px 10px; border:1px solid #E2E8F0;">You can ... / We can ...</td></tr>
+                <tr><td style="padding:8px 10px; border:1px solid #E2E8F0;"><strong>Why is it special?</strong> 为什么特别？</td><td style="padding:8px 10px; border:1px solid #E2E8F0;">I think it's ... because ... / It's important to ...</td></tr>
+                <tr><td style="padding:8px 10px; border:1px solid #E2E8F0;"><strong>Would you like to come?</strong> 来吗？</td><td style="padding:8px 10px; border:1px solid #E2E8F0;">Please come and join us! / I think you'll like it.</td></tr>
+              </table>
+              <strong>关键操作：</strong>先让学生<span class="hl">口头回答</span>这5个问题（Pair Work），确认"能说了"再写。<br>
+              <strong>这是从读到写不可跳过的台阶</strong>——跳过口头内化，基础薄弱学生会"写不出来"。
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">18</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动3：核心任务 &mdash; 写活动推荐信</h5>
+            <p>学生独立写作，使用分层支架（见分层支架板块）</p>
+            <div class="activity-detail">
+              <strong>写作要求：</strong>向朋友推荐一个学校活动，写60-80词<br>
+              <strong>写作场景：</strong>真实书信体（Dear ..., ... Yours, [Name]）<br><br>
+              <strong>分层支架（教师巡视时提供）：</strong><br>
+              &#8226; 初阶：完成填空模板<br>
+              &#8226; 中阶：用五问支架自组段落<br>
+              &#8226; 高阶：自主写作，只参考评价量表<br><br>
+              <strong>教师角色：</strong>巡视 &rarr; 发现共性错误 &rarr; 即时点评（不用等全写完）<br>
+              <strong>常见问题预警：</strong>学生可能忘记"On + 月份 + 序数词"结构中的"On"或序数词后缀
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">10</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动4：评价改进 &mdash; "互评变好"</h5>
+            <p>同桌交换，对照四维评价量表互评，修改后定稿</p>
+            <div class="activity-detail">
+              <strong>互评步骤：</strong><br>
+              1. 交换写作 &rarr; 读同伴的信<br>
+              2. 对照评价量表，在每项打分（1-3分）<br>
+              3. 用反馈句式写1条建议<br>
+              4. 取回自己的信，根据建议修改<br><br>
+              <strong>反馈句式（替代笼统的"Good"或"写得不好"）：</strong><br>
+              &bull; "You told me when the activity is clearly."（肯定具体维度）<br>
+              &bull; "Try to add why you like it."（指出改进方向）<br>
+              &bull; "Can you tell me more about what we can do there?"（引导深层思考）<br>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="activity-step">
+          <div class="activity-time">
+            <div class="num">4</div>
+            <div class="unit">分钟</div>
+          </div>
+          <div class="activity-body">
+            <h5>活动5：收束 &mdash; "让特别的日子被更多人知道"</h5>
+            <p>回到核心问题，展示1-2篇优秀作品，全班赏析</p>
+            <div class="activity-detail">
+              <strong>教师引导：</strong>"We know what makes a date special. Now we can share it with our friends. This is the power of language &mdash; to connect people through what matters."<br>
+              <strong>作业：</strong>① 修改定稿推荐信，下节课展示 ② 设计"英语周"活动日程表（Section B 3b拓展）
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 6: Scaffolding ==================== -->
+<section class="section" id="scaffold">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--orange);">3</div>
+    <div class="section-title">分层支架设计</div>
+  </div>
+
+  <div class="card card-orange">
+    <h3>&#127919; 写作任务分层支架（第3课时）</h3>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">同一任务，不同支撑程度。不是出三套题，而是同一道题给不同的"拐杖"。</p>
+
+    <div class="scaffold-grid">
+      <div class="scaffold-card">
+        <h5><span class="scaffold-level level-low"></span>初阶：填空仿写</h5>
+        <p>提供完整段落模板，学生替换关键词</p>
+        <div style="background: var(--green-light); border-radius:8px; padding:12px; margin-top:8px; font-size:13px; font-family: Georgia, serif; line-height:1.8;">
+          Dear Li Ming,<br><br>
+          We have a(n) <span style="border-bottom:1px solid var(--green); min-width:80px; display:inline-block;">&nbsp;activity&nbsp;</span> at our school. It's on <span style="border-bottom:1px solid var(--green); min-width:80px; display:inline-block;">&nbsp;Month Date&nbsp;</span>. You can <span style="border-bottom:1px solid var(--green); min-width:80px; display:inline-block;">&nbsp;do something&nbsp;</span> there. I think it's <span style="border-bottom:1px solid var(--green); min-width:60px; display:inline-block;">&nbsp;adj.&nbsp;</span> because <span style="border-bottom:1px solid var(--green); min-width:80px; display:inline-block;">&nbsp;reason&nbsp;</span>. Please come and join us!<br><br>
+          Yours,<br>
+          [Name]
+        </div>
+      </div>
+
+      <div class="scaffold-card">
+        <h5><span class="scaffold-level level-mid"></span>中阶：句型菜单</h5>
+        <p>提供句型菜单，学生选择组合</p>
+        <div style="background: var(--orange-light); border-radius:8px; padding:12px; margin-top:8px; font-size:13px;">
+          <strong>开头：</strong> We have a(n) ... / There is a(n) ...<br>
+          <strong>时间：</strong> It's on ... / The ... is on ...<br>
+          <strong>内容：</strong> You can ... / We can ...<br>
+          <strong>评价：</strong> I think it's ... because ... / It's important to ...<br>
+          <strong>推荐：</strong> Please come! / I think you'll like it.
+        </div>
+      </div>
+
+      <div class="scaffold-card">
+        <h5><span class="scaffold-level level-high"></span>高阶：独立创作</h5>
+        <p>只提供评价量表，学生自由发挥</p>
+        <div style="background: var(--accent-light); border-radius:8px; padding:12px; margin-top:8px; font-size:13px;">
+          写一封60-80词的活动推荐信。<br>
+          要求：<br>
+          &bull; 说明活动名称和时间<br>
+          &bull; 描述活动内容<br>
+          &bull; 给出推荐理由<br>
+          &bull; 邀请对方参加<br>
+          参考评价量表自行检查。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>&#128101; 学困生特别支持策略</h3>
+    <table class="tbl">
+      <tr><th>策略</th><th>具体做法</th></tr>
+      <tr><td><strong>降低输入量</strong></td><td>每次只要求使用2-3个语块，如"When is...?"和"It's on..."，不追求全用</td></tr>
+      <tr><td><strong>口语先行</strong></td><td>先口头说1-2句，确认能说了再写。第3课时活动2的口头回答是必做环节</td></tr>
+      <tr><td><strong>模板托底</strong></td><td>初阶填空模板保证"能完成"，获得成功体验</td></tr>
+      <tr><td><strong>同伴合作</strong></td><td>能力强的学生口述，学困生记录整合，两人共同产出</td></tr>
+      <tr><td><strong>关键词墙</strong></td><td>黑板/课件上始终保留本课核心语块，学生写作时可随时参考</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 7: Assessment ==================== -->
+<section class="section" id="assess">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--accent);">4</div>
+    <div class="section-title">嵌入式评价设计</div>
+  </div>
+
+  <div class="card card-red">
+    <h3>&#127919; 教—学—评一体化：评价镶嵌在教学全程</h3>
+    <div class="assess-grid">
+      <div class="assess-item">
+        <div class="icon">&#128066;</div>
+        <div class="label">课前诊断</div>
+        <div class="desc">名人生日猜谜<br>检测月份词起点</div>
+      </div>
+      <div class="assess-item">
+        <div class="icon">&#128269;</div>
+        <div class="label">语块识别检查</div>
+        <div class="desc">巡视三色标注<br>确认提取质量</div>
+      </div>
+      <div class="assess-item">
+        <div class="icon">&#128483;</div>
+        <div class="label">口头表达观察</div>
+        <div class="desc">Pair Work巡视<br>检验内化程度</div>
+      </div>
+      <div class="assess-item">
+        <div class="icon">&#9997;</div>
+        <div class="label">写作评价</div>
+        <div class="desc">四维量表互评<br>促进自我监控</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>&#128202; 写作评价四维量表（第3课时）</h3>
+    <div class="rubric">
+      <div class="rubric-header">
+        <div>评价维度</div>
+        <div>3分（优秀）</div>
+        <div>2分（良好）</div>
+        <div>1分（待改进）</div>
+      </div>
+      <div class="rubric-row">
+        <div>内容完整</div>
+        <div>活动名称、时间、内容、理由、邀请五项齐全</div>
+        <div>包含3-4项信息</div>
+        <div>信息零散，读者难以了解活动</div>
+      </div>
+      <div class="rubric-row">
+        <div>语言迁移</div>
+        <div>自然使用本单元语块（When is.../It's on.../because...）</div>
+        <div>使用部分语块，少量错误</div>
+        <div>单词堆砌，语块较少</div>
+      </div>
+      <div class="rubric-row">
+        <div>结构清晰</div>
+        <div>五问顺序合理，衔接自然</div>
+        <div>顺序基本清楚</div>
+        <div>缺少组织，信息跳跃</div>
+      </div>
+      <div class="rubric-row">
+        <div>意义表达</div>
+        <div>能说明为什么值得参加</div>
+        <div>有简单推荐理由</div>
+        <div>只有"我喜欢"，无理由</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>&#128172; 教师反馈句式</h3>
+    <table class="tbl">
+      <tr><th>类型</th><th>反馈句式</th><th>替代的笼统说法</th></tr>
+      <tr><td><span class="tag tag-green">肯定</span></td><td>"You told me WHEN the activity is clearly."</td><td>"Good!"</td></tr>
+      <tr><td><span class="tag tag-orange">建议</span></td><td>"Try to add WHY you like it."</td><td>"写得不够好。"</td></tr>
+      <tr><td><span class="tag tag-blue">引导</span></td><td>"Can you tell me more about what we can DO there?"</td><td>"再多写点。"</td></tr>
+      <tr><td><span class="tag tag-purple">深化</span></td><td>"What makes this activity special for YOU?"</td><td>"要有个性。"</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 8: Thinking Skills ==================== -->
+<section class="section" id="thinking">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--purple);">5</div>
+    <div class="section-title">思维培养体系</div>
+  </div>
+
+  <div class="card card-purple">
+    <h3>&#129504; 从"教语言"到"教思维"</h3>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">龚亚夫：英语教育不仅是语言交流，更是思维发展。三大目标（社会文化+思维认知+语言交流）密不可分。</p>
+
+    <div class="thinking-ladder">
+      <div class="thinking-step s1">
+        <h5>识别与描述</h5>
+        <p>说出日期和活动<br>"It's on..."<br>"We have..."</p>
+      </div>
+      <div class="thinking-step s2">
+        <h5>分析与比较</h5>
+        <p>对比不同活动<br>"Why is it different?"<br>"Which one is better?"</p>
+      </div>
+      <div class="thinking-step s3">
+        <h5>评价与创造</h5>
+        <p>判断并推荐<br>"I think...because..."<br>设计活动日程</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>&#128200; 思维培养在3课时中的嵌入</h3>
+    <table class="tbl">
+      <tr>
+        <th>课时</th>
+        <th>思维层次</th>
+        <th>设计要点</th>
+        <th>教师引导语</th>
+      </tr>
+      <tr>
+        <td><span class="tag tag-blue">第1课时</span></td>
+        <td>识别 &rarr; 分类</td>
+        <td>不只问"When is your birthday?"，还问"How do you know your birthday matters?"</td>
+        <td>"What makes a birthday special?"</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-green">第2课时</span></td>
+        <td>分析 &rarr; 比较</td>
+        <td>设计"选择"类任务：哪个活动更适合你？为什么？</td>
+        <td>"Why do you like this activity, not that one?"</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-purple">第3课时</span></td>
+        <td>评价 &rarr; 创造</td>
+        <td>写推荐信=做判断+给理由，设计日程=创造性整合</td>
+        <td>"What makes this activity worth joining?"</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SECTION 9: Three Objectives ==================== -->
+<section class="section" id="objectives">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--teal);">6</div>
+    <div class="section-title">龚亚夫三大目标融入设计</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--teal);">
+    <h3>&#127757; 三大目标如何成为教学底层逻辑</h3>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">不是"教语言顺便提一下文化"，而是三大目标同时驱动教学设计。</p>
+
+    <div class="chunk-box">
+      <div class="chunk-card" style="background: var(--primary-light);">
+        <h5><span class="tag tag-blue">社会文化目标</span></h5>
+        <p style="font-size:14px;">理解生日和节庆在不同文化中的意义差异。从"我的生日"到"中国重要节日"到"学校文化活动"——日期不只是数字，是文化认同和情感联结。</p>
+        <p style="font-size:12px; color:var(--gray-500); margin-top:8px;">
+          课时1作业"查找3个中国节日日期" &rarr; 课时2"节日快问快答" &rarr; 课时3推荐信中的文化元素
+        </p>
+      </div>
+
+      <div class="chunk-card" style="background: var(--orange-light);">
+        <h5><span class="tag tag-orange">思维认知目标</span></h5>
+        <p style="font-size:14px;">从"说出日期"到"比较活动"到"评价意义"。三个课时递进式培养识别&mdash;分析&mdash;评价能力，而不是停留于信息复述。</p>
+        <p style="font-size:12px; color:var(--gray-500); margin-top:8px;">
+          课时1分类(生日/节日/活动) &rarr; 课时2比较(你为什么选这个) &rarr; 课时3评价(推荐+理由)
+        </p>
+      </div>
+
+      <div class="chunk-card" style="background: var(--green-light);">
+        <h5><span class="tag tag-green">语言交流目标</span></h5>
+        <p style="font-size:14px;">6类语块支撑完整表达：从询问日期、表达日期、询问年龄、谈论活动、评价意义到推荐建议——形成"有话可说、有结构可依、有语言可用"的闭环。</p>
+        <p style="font-size:12px; color:var(--gray-500); margin-top:8px;">
+          课时1(2类) &rarr; 课时2(+3类) &rarr; 课时3(6类综合) &mdash; 语块不是一次教完，而是在任务中逐步叠加
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 10: AI Collaboration ==================== -->
+<section class="section" id="ai">
+  <div class="section-header">
+    <div class="section-num" style="background: var(--gray-700);">7</div>
+    <div class="section-title">AI协同设计 &amp; 80/20质量法则</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--gray-600);">
+    <h3>&#129302; 本教案的AI协同记录</h3>
+    <table class="tbl">
+      <tr><th>环节</th><th>AI生成内容</th><th>教师干预点</th></tr>
+      <tr>
+        <td><strong>语块提取</strong></td>
+        <td>AI列出月份、序数词、When问句等语言点</td>
+        <td>按六类功能重新分类；补充"评价意义"和"推荐建议"两类AI容易遗漏的语块</td>
+      </tr>
+      <tr>
+        <td><strong>任务设计</strong></td>
+        <td>AI生成5个独立活动（听力、口语、阅读、写作、游戏）</td>
+        <td>串联为3课时任务链；增加"口头内化"环节；设计核心驱动问题</td>
+      </tr>
+      <tr>
+        <td><strong>分层支架</strong></td>
+        <td>AI生成三套不同难度题目</td>
+        <td>调整为"同一任务不同支撑程度"；初阶确保学困生能完成</td>
+      </tr>
+      <tr>
+        <td><strong>评价设计</strong></td>
+        <td>AI生成评价维度</td>
+        <td>具体化为可操作描述；设计口语化反馈句式；检验评价-教学对齐</td>
+      </tr>
+      <tr>
+        <td><strong>思维培养</strong></td>
+        <td>AI列出Bloom's Taxonomy问题</td>
+        <td>选择真正有思维张力的对比点："为什么这个活动值得参加"而非"你喜欢什么"</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>&#128270; 80/20 质量法则检查</h3>
+    <table class="tbl">
+      <tr><th>维度</th><th>AI通常做好的(80%)</th><th style="color:var(--accent);">需要教师干预的(20%)</th></tr>
+      <tr><td>教学目标</td><td>能写出基本目标框架</td><td style="color:var(--accent);">核心素养指向是否准确？目标是否可观测？三大目标是否同时驱动？</td></tr>
+      <tr><td>语块提取</td><td>能列出词汇和短语</td><td style="color:var(--accent);">语块功能分类是否正确？"评价意义"和"推荐建议"类语块是否遗漏？</td></tr>
+      <tr><td>任务设计</td><td>能设计基本活动流程</td><td style="color:var(--accent);">任务链逻辑是否连贯？从读到写的过渡是否自然？口头内化环节是否跳过？</td></tr>
+      <tr><td>分层支架</td><td>能生成不同难度任务</td><td style="color:var(--accent);">初阶是否足够简单？活动场景是否真实？是否同一任务不同支撑？</td></tr>
+      <tr><td>评价设计</td><td>能列出评价维度</td><td style="color:var(--accent);">评价标准是否具体可操作？反馈句式是否可用？评价是否镶嵌在过程中？</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>基于龚亚夫"语块—句型—任务链"方法论 + 2022版新课标核心素养 &middot; AI协同设计</p>
+  <p style="margin-top:8px;">人教版七年级上册 Unit 8 When is your birthday? &middot; 任务型教学教案</p>
+</footer>
+
+</main>
+
+<script>
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      const offset = 52; // nav height
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// Highlight active nav on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 80;
+    if (window.pageYOffset >= top) current = sec.id;
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === '#' + current ? 'var(--primary)' : '';
+    link.style.borderBottomColor = link.getAttribute('href') === '#' + current ? 'var(--primary)' : 'transparent';
+  });
+});
+</script>
+</body>
+</html>
