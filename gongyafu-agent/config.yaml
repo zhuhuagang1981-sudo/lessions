@@ -1,0 +1,30 @@
+# 龚亚夫智能体配置文件
+
+server:
+  host: "0.0.0.0"
+  port: 8900
+  debug: false
+
+llm:
+  # OpenAI 兼容接口配置
+  api_key: "your-api-key-here"
+  base_url: "https://api.openai.com/v1"
+  model: "gpt-4o"
+  temperature: 0.7
+  max_tokens: 2048
+  timeout: 60
+
+agent:
+  name: "龚亚夫教学智能体"
+  # 苏格拉底对话参数
+  max_probing_rounds: 3        # 最大追问轮数后给结论
+  min_probing_rounds: 1        # 最少追问轮数后才给结论
+  probe_probability: 0.8       # 追问概率（余下20%直接给结论）
+  # 边界守卫参数
+  off_topic_threshold: 0.35    # 话题相关性阈值（越低越严格）
+  off_topic_message: "我是一位专注于英语教学的智能助手，只能回答与英语教学相关的问题。让我们回到教学话题吧——您在教学中遇到了什么困惑？"
+  # 知识约束
+  knowledge_source: "gongyafu_only"  # 仅限龚亚夫著作
+  # 对话风格
+  tone: "warm_professional"     # 温暖专业
+  address_teacher_as: "老师"     # 称呼用户
