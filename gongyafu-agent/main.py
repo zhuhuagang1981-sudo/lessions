@@ -23,6 +23,7 @@ from agent import (
     SourceTracking, CaseGuidance, GradeLevelAwareness,
     book_cross_reference, BOOK_NAMES,
     format_response,
+    get_context_for_query,
 )
 
 # ─── 加载配置 ───────────────────────────────────────
@@ -155,6 +156,11 @@ def build_messages(session: Dict[str, Any], user_message: str) -> List[Dict[str,
         "- 适时使用'我听过一位老师这样上这节课...'引入案例\n"
         "- 回答控制在150-300字"
     )
+    
+    # 🔍 检索4本书中的相关段落，注入上下文
+    book_context = get_context_for_query(user_message, max_chars=2000)
+    if book_context:
+        system_content += f"\n\n---\n\n# 著作原文参考\n\n{book_context}\n\n请基于以上原文内容回答，保持龚亚夫老师的表达风格。"
     
     messages = [{"role": "system", "content": system_content}]
     
