@@ -1,6 +1,7 @@
 """
-龚亚夫教学智能体 - FastAPI 主程序
-可部署到本地服务器的AI对话服务
+龚亚夫教学智能体 v2 - FastAPI 主程序
+基于五本著作的AI对话服务
+可部署到本地服务器
 """
 
 import os
@@ -17,7 +18,11 @@ from typing import Optional, Dict, Any, List
 from agent import (
     SYSTEM_PROMPT, KNOWLEDGE_BASE,
     is_teaching_related, get_redirection_message,
-    DialogueEngine, DialogueStage, format_response,
+    detect_grade_level, get_topic_classification,
+    DialogueEngine, DialogueStage,
+    SourceTracking, CaseGuidance, GradeLevelAwareness,
+    book_cross_reference, BOOK_NAMES,
+    format_response,
 )
 
 # ─── 加载配置 ───────────────────────────────────────
@@ -28,8 +33,13 @@ with open(CONFIG_PATH, "r", encoding="utf-8") as f:
 LLM_CONFIG = CONFIG["llm"]
 AGENT_CONFIG = CONFIG["agent"]
 
+# ─── 加载知识库JSON ─────────────────────────────────
+KNOWLEDGE_JSON_PATH = os.path.join(os.path.dirname(__file__), "data", "knowledge.json")
+with open(KNOWLEDGE_JSON_PATH, "r", encoding="utf-8") as f:
+    KNOWLEDGE_JSON = json.load(f)
+
 # ─── 初始化 ─────────────────────────────────────────
-app = FastAPI(title="龚亚夫教学智能体", version="1.0.0")
+app = FastAPI(title="龚亚夫教学智能体", version="2.0.0")
 dialogue_engine = DialogueEngine(
     max_probing_rounds=AGENT_CONFIG.get("max_probing_rounds", 3),
     min_probing_rounds=AGENT_CONFIG.get("min_probing_rounds", 1),
@@ -37,9 +47,6 @@ dialogue_engine = DialogueEngine(
 
 # 会话存储（生产环境应替换为Redis/数据库）
 sessions: Dict[str, Dict[str, Any]] = {}
-
-# 构建知识库摘要（注入系统提示词）
-KNOWLEDGE_SUMMARY = _build_knowledge_summary() if False else ""
 
 
 # ─── 数据模型 ───────────────────────────────────────
@@ -55,6 +62,8 @@ class ChatResponse(BaseModel):
     dialogue_stage: str
     probing_count: int
     goal_dimension: Optional[str] = None
+    grade_level: Optional[str] = None
+    source_books: List[str] = []
 
 
 # ─── 核心逻辑 ───────────────────────────────────────
@@ -66,10 +75,14 @@ def get_or_create_session(session_id: Optional[str]) -> Dict[str, Any]:
     new_id = session_id or str(uuid.uuid4())
     sessions[new_id] = {
         "id": new_id,
-        "history": [],           # 对话历史 [{"role": "user/assistant", "content": "..."}]
-        "probing_count": 0,      # 当前追问轮数
-        "stage": "init",         # 对话阶段
-        "topics_discussed": [],  # 已讨论的话题维度
+        "history": [],                # 对话历史
+        "probing_count": 0,           # 当前追问轮数
+        "stage": "init",             # 对话阶段
+        "topics_discussed": [],       # 已讨论的话题
+        "grade_level": None,          # 识别到的学段
+        "source_tracking": SourceTracking(),  # 引用追踪
+        "case_guidance": CaseGuidance(),       # 案例引导
+        "grade_awareness": GradeLevelAwareness(),  # 学段识别
     }
     return sessions[new_id]
 
@@ -97,9 +110,21 @@ async def call_llm(messages: List[Dict[str, str]]) -> str:
 
 def build_messages(session: Dict[str, Any], user_message: str) -> List[Dict[str, str]]:
     """构建发送给LLM的消息列表"""
-    # 获取当前对话阶段指令
+    # 获取当前对话阶段
     stage = DialogueStage(session["stage"])
-    stage_instruction = dialogue_engine.get_stage_instruction(stage)
+    
+    # 获取学段识别结果
+    grade_level = session.get("grade_level")
+    source_tracking = session.get("source_tracking", SourceTracking())
+    case_guidance = session.get("case_guidance", CaseGuidance())
+    
+    # 获取阶段指令（含学段感知）
+    stage_instruction = dialogue_engine.get_stage_instruction(
+        stage,
+        grade_level=grade_level,
+        source_tracking=source_tracking,
+        case_guidance=case_guidance,
+    )
     
     # 构建系统提示词
     system_content = SYSTEM_PROMPT
@@ -108,14 +133,27 @@ def build_messages(session: Dict[str, Any], user_message: str) -> List[Dict[str,
     if stage_instruction:
         system_content += f"\n\n---\n\n# 当前对话阶段指令\n\n{stage_instruction}"
     
+    # 添加学段信息
+    if grade_level:
+        grade_label = "小学" if grade_level == "primary" else "初中"
+        system_content += f"\n\n---\n\n# 学段识别\n\n教师关注的是{grade_label}教学，优先引用{grade_label}分册案例。"
+    
+    # 添加已引用书籍信息
+    if source_tracking and source_tracking.books_referenced:
+        books_str = "、".join(BOOK_NAMES.get(b, b) for b in source_tracking.books_referenced)
+        unreferenced = [BOOK_NAMES[b] for b in BOOK_NAMES if b not in source_tracking.books_referenced]
+        if unreferenced:
+            system_content += f"\n\n已引用著作：{books_str}。可补充：{'、'.join(unreferenced)}的相关视角。"
+    
     # 添加知识约束提醒
     system_content += (
         "\n\n---\n\n# 重要提醒\n\n"
-        "- 你只能依据龚亚夫老师三本著作的教学理念回答问题\n"
+        "- 你只能依据龚亚夫老师五本著作的教学理念回答问题\n"
         "- 不要搜索或引用任何网络来源\n"
         "- 不要使用龚亚夫著作以外的理论框架\n"
         "- 保持苏格拉底式追问风格，不直接给长篇答案\n"
-        "- 回答控制在200-400字"
+        "- 适时使用'我听过一位老师这样上这节课...'引入案例\n"
+        "- 回答控制在150-300字"
     )
     
     messages = [{"role": "system", "content": system_content}]
@@ -136,20 +174,28 @@ async def process_chat(message: str, session_id: Optional[str] = None) -> ChatRe
     session = get_or_create_session(session_id)
     sid = session["id"]
     
-    # 2. 边界守卫：检查话题相关性
-    if not is_teaching_related(message):
+    # 2. 学段识别
+    grade_awareness = session.get("grade_awareness", GradeLevelAwareness())
+    detected_grade = grade_awareness.detect(message)
+    if detected_grade:
+        session["grade_level"] = detected_grade
+    
+    # 3. 边界守卫：检查话题相关性
+    topic_class = get_topic_classification(message)
+    if topic_class == "forbidden":
         return ChatResponse(
-            reply=get_redirection_message(),
+            reply=get_redirection_message(grade_level=session.get("grade_level")),
             session_id=sid,
             is_on_topic=False,
             dialogue_stage=session["stage"],
             probing_count=session["probing_count"],
+            grade_level=session.get("grade_level"),
         )
     
-    # 3. 记录用户消息到历史
+    # 4. 记录用户消息到历史
     session["history"].append({"role": "user", "content": message})
     
-    # 4. 构建消息并调用LLM
+    # 5. 构建消息并调用LLM
     messages = build_messages(session, message)
     
     try:
@@ -161,10 +207,31 @@ async def process_chat(message: str, session_id: Optional[str] = None) -> ChatRe
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"内部错误: {str(e)}")
     
-    # 5. 记录助手回复到历史
+    # 6. 记录助手回复到历史
     session["history"].append({"role": "assistant", "content": reply})
     
-    # 6. 更新对话状态
+    # 7. 更新引用追踪
+    source_tracking = session.get("source_tracking", SourceTracking())
+    # 简单关键词匹配识别引用了哪本书
+    book_keywords = {
+        "task": ["任务型", "任务链", "前任务", "语块-句型", "任务环"],
+        "foundation_1": ["多元目标", "三目标", "价值重估", "人文性", "三个世界"],
+        "foundation_2": ["教材评价", "二次开发", "教师发展", "课堂观察", "校本教研"],
+        "primary": ["小学", "phonics", "自然拼读", "低年级"],
+        "junior": ["初中", "单元整体", "读写结合", "中考", "Go for it"],
+    }
+    for book_id, keywords in book_keywords.items():
+        if any(kw in message or kw in reply for kw in keywords):
+            source_tracking.add_reference(book_id)
+    session["source_tracking"] = source_tracking
+    
+    # 8. 更新案例引导状态
+    case_guidance = session.get("case_guidance", CaseGuidance())
+    if "我听过一位老师" in reply or "我见过一位老师" in reply:
+        case_guidance.mark_case_used()
+    session["case_guidance"] = case_guidance
+    
+    # 9. 更新对话状态
     current_stage = DialogueStage(session["stage"])
     if current_stage == DialogueStage.INIT:
         session["stage"] = DialogueStage.LISTENING.value
@@ -197,17 +264,20 @@ async def process_chat(message: str, session_id: Optional[str] = None) -> ChatRe
         session["stage"] = DialogueStage.LISTENING.value
         session["probing_count"] = 0
     
-    # 7. 识别涉及的维度（简单关键词匹配）
+    # 10. 识别涉及的维度
     goal_dimension = None
     dimension_keywords = {
-        "社会文化": ["社会文化", "行为规范", "美德", "多元文化", "国际意识", "学科融合"],
-        "思维认知": ["思维认知", "思维能力", "成长型思维", "学习策略", "元认知"],
-        "语言交流": ["语言交流", "语言知识", "语言技能", "沟通策略", "交际"],
+        "社会文化": ["社会文化", "行为规范", "美德", "多元文化", "国际意识", "学科融合", "文化使命"],
+        "思维认知": ["思维认知", "思维能力", "成长型思维", "学习策略", "元认知", "思维品质", "高阶思维"],
+        "语言交流": ["语言交流", "语言知识", "语言技能", "沟通策略", "交际", "语块", "句型"],
     }
     for dim, keywords in dimension_keywords.items():
         if any(kw in message for kw in keywords):
             goal_dimension = dim
             break
+    
+    # 11. 收集引用的书籍
+    source_books = [BOOK_NAMES.get(b, b) for b in source_tracking.books_referenced]
     
     return ChatResponse(
         reply=reply,
@@ -216,6 +286,8 @@ async def process_chat(message: str, session_id: Optional[str] = None) -> ChatRe
         dialogue_stage=session["stage"],
         probing_count=session["probing_count"],
         goal_dimension=goal_dimension,
+        grade_level=session.get("grade_level"),
+        source_books=source_books,
     )
 
 
@@ -234,8 +306,10 @@ async def health_check():
     return {
         "status": "ok",
         "agent": AGENT_CONFIG["name"],
+        "version": "2.0.0",
         "sessions": len(sessions),
         "llm_model": LLM_CONFIG["model"],
+        "knowledge_sources": len(KNOWLEDGE_JSON.get("meta", {}).get("sources", [])),
     }
 
 
@@ -245,12 +319,15 @@ async def get_session(session_id: str):
     if session_id not in sessions:
         raise HTTPException(status_code=404, detail="会话不存在")
     s = sessions[session_id]
+    source_tracking = s.get("source_tracking", SourceTracking())
     return {
         "session_id": s["id"],
         "stage": s["stage"],
         "probing_count": s["probing_count"],
         "message_count": len(s["history"]),
         "topics": s["topics_discussed"],
+        "grade_level": s.get("grade_level"),
+        "books_referenced": [BOOK_NAMES.get(b, b) for b in source_tracking.books_referenced],
     }
 
 
@@ -260,6 +337,21 @@ async def delete_session(session_id: str):
     if session_id in sessions:
         del sessions[session_id]
     return {"status": "deleted"}
+
+
+@app.get("/api/knowledge/books")
+async def get_books():
+    """获取知识库书籍列表"""
+    return KNOWLEDGE_JSON.get("meta", {}).get("sources", [])
+
+
+@app.get("/api/knowledge/qna")
+async def get_qna(topic: Optional[str] = None):
+    """获取QA知识对"""
+    pairs = KNOWLEDGE_JSON.get("qna_pairs", [])
+    if topic:
+        pairs = [p for p in pairs if topic in p.get("topic", "") or topic in p.get("key_points", [])]
+    return pairs[:10]
 
 
 # ─── 静态文件和页面 ─────────────────────────────────
@@ -280,9 +372,10 @@ if __name__ == "__main__":
     host = CONFIG["server"]["host"]
     port = CONFIG["server"]["port"]
     debug = CONFIG["server"]["debug"]
-    print(f"🏛️  龚亚夫教学智能体启动中...")
+    print(f"🏛️  龚亚夫教学智能体 v2 启动中...")
     print(f"📍 地址: http://localhost:{port}")
     print(f"🤖 模型: {LLM_CONFIG['model']}")
-    print(f"📚 知识来源: 龚亚夫三本著作（仅限）")
+    print(f"📚 知识来源: 龚亚夫五本著作（仅限）")
     print(f"🔒 话题边界: 仅英语教学")
+    print(f"🎯 对话风格: 苏格拉底式追问 + 案例引导")
     uvicorn.run("main:app", host=host, port=port, reload=debug)
