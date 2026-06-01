@@ -25,6 +25,7 @@ from .dialogue_engine import (
     BOOK_NAMES,
 )
 from .response_formatter import format_response
+from .book_search import search_books, get_context_for_query, get_book_toc
 
 __all__ = [
     "SYSTEM_PROMPT",
@@ -48,4 +49,7 @@ __all__ = [
     "BOOK_JUNIOR",
     "BOOK_NAMES",
     "format_response",
+    "search_books",
+    "get_context_for_query",
+    "get_book_toc",
 ]
